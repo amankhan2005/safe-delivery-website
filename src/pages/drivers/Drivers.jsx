@@ -312,36 +312,53 @@ export default function Drivers() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="py-20 bg-[#F7F8FA]">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-          <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
+    
+     {/* ── CTA ── */}
+<section className="py-20 bg-[#F7F8FA]">
+  <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
 
-            <div>
-              <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
-                style={{ fontFamily: "'Syne', sans-serif" }}>
-                Join Our Network
-              </p>
-              <h2
-                className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
-                style={{ fontFamily: "'Syne', sans-serif" }}
-              >
-                Start Earning{" "}
-                <span className="text-[#E8212B]">Today</span>
-              </h2>
-              <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
-                Join our growing network of drivers and start earning with
-                flexible delivery jobs across Liberia.
-              </p>
+      <div>
+        <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
+          style={{ fontFamily: "'Syne', sans-serif" }}>
+          Join Our Network
+        </p>
+        <h2
+          className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          Start Earning{" "}
+          <span className="text-[#E8212B]">Today</span>
+        </h2>
+        <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
+          Join our growing network of drivers and start earning with
+          flexible delivery jobs across Liberia.
+        </p>
+      </div>
+
+      {/* ✅ flex-row on all screens */}
+      <div className="flex flex-row flex-wrap gap-3 shrink-0 justify-center">
+        {[
+          { label: "Google Play", sub: "Get it on" },
+          { label: "App Store", sub: "Download on the" },
+        ].map(({ label, sub }) => (
+          <div key={label}
+            className="relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl cursor-not-allowed opacity-80 border bg-white/10 border-white/20">
+            <div className="text-left leading-tight">
+              <p className="text-[9px] text-white/50 uppercase tracking-widest">{sub}</p>
+              <p className="text-[12px] font-semibold text-white"
+                style={{ fontFamily: "'Syne', sans-serif" }}>{label}</p>
             </div>
-
-            <div className="flex flex-col gap-3 shrink-0">
-              <StoreButtons variant="dark" />
-            </div>
-
+            <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+              Soon
+            </span>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
 
     </div>
   );

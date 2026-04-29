@@ -5,7 +5,7 @@ const StoreButtons = () => (
         label: "Google Play", sub: "Get it on",
         icon: (
           <svg viewBox="0 0 24 24" fill="#374151" width={20} height={20}>
-            <path d="M3.18 23.76c.3.17.65.2.98.08l11.65-6.73-2.62-2.62-10.01 9.27zm-1.85-20.1C1.12 4 1 4.37 1 4.8v14.4c0 .43.12.8.33 1.1l.07.07 8.07-8.07v-.19L1.4 3.64l-.07.02zM20.4 10.4l-2.29-1.32-2.91 2.91 2.91 2.91 2.31-1.33c.66-.38.66-1 0-1.38l-.02.01zM4.16.24L15.81 6.97l-2.62 2.62L3.18.31A1.1 1.1 0 014.16.24z"/>
+            <path d="M3.18 23.76c.3.17.65.2.98.08l11.65-6.73-2.62-2.62-10.01 9.27zm-1.85-20.1C1.12 4 1 4.37 1 4.8v14.4c0 .43.12.8.33 1.1l.07.07 8.07-8.07v-.19L1.4 3.64l-.07.02zM20.4 10.4l-2.29-1.32-2.91 2.91 2.91 2.91 2.31-1.33c.66-.38.66-1 0-1.38l-.02.01zM4.16.24L15.81 6.97l-2.62 2.62L3.18.31A1.1 1.1 0 014.16.24z" />
           </svg>
         ),
       },
@@ -13,7 +13,7 @@ const StoreButtons = () => (
         label: "App Store", sub: "Download on the",
         icon: (
           <svg viewBox="0 0 24 24" fill="#374151" width={20} height={20}>
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
         ),
       },
@@ -46,8 +46,8 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <rect x="3" y="3" width="18" height="18" rx="3"/>
-        <path d="M8 12h8M12 8v8"/>
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M8 12h8M12 8v8" />
       </svg>
     ),
   },
@@ -62,8 +62,8 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <circle cx="12" cy="10" r="3"/>
-        <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z"/>
+        <circle cx="12" cy="10" r="3" />
+        <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z" />
       </svg>
     ),
   },
@@ -78,8 +78,8 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6L12 2z"/>
-        <path d="M9 12l2 2 4-4"/>
+        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6L12 2z" />
+        <path d="M9 12l2 2 4-4" />
       </svg>
     ),
   },
@@ -94,8 +94,8 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
-        <path d="M14 2v6h6M8 13h8M8 17h5"/>
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+        <path d="M14 2v6h6M8 13h8M8 17h5" />
       </svg>
     ),
   },
@@ -110,10 +110,10 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <rect x="1" y="3" width="15" height="13" rx="2"/>
-        <path d="M16 8h4l3 3v5h-7V8z"/>
-        <circle cx="5.5" cy="18.5" r="2.5"/>
-        <circle cx="18.5" cy="18.5" r="2.5"/>
+        <rect x="1" y="3" width="15" height="13" rx="2" />
+        <path d="M16 8h4l3 3v5h-7V8z" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
       </svg>
     ),
   },
@@ -128,9 +128,9 @@ const features = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
         strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-        <rect x="2" y="7" width="20" height="14" rx="2"/>
-        <path d="M16 7V5a2 2 0 00-4 0v2"/>
-        <path d="M12 12v4M10 14h4"/>
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 7V5a2 2 0 00-4 0v2" />
+        <path d="M12 12v4M10 14h4" />
       </svg>
     ),
   },
@@ -165,7 +165,7 @@ export default function Customer() {
               delivery with OTP verification.
             </p>
 
-           
+
 
             <StoreButtons />
           </div>
@@ -229,6 +229,7 @@ export default function Customer() {
         </div>
       </section>
 
+
       {/* ── CTA ── */}
       <section className="py-20 bg-white">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8">
@@ -251,8 +252,8 @@ export default function Customer() {
               </p>
             </div>
 
-            {/* CTA store buttons — white variant */}
-            <div className="flex flex-col gap-3 shrink-0">
+            {/* ✅ flex-row on all screens, wraps if needed */}
+            <div className="flex flex-row gap-3 shrink-0 flex-wrap justify-center">
               {[
                 { label: "Google Play", sub: "Get it on" },
                 { label: "App Store", sub: "Download on the" },

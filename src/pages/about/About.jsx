@@ -1,5 +1,5 @@
 const StoreButtons = ({ variant = "light" }) => (
-  <div className="flex flex-wrap gap-3 mt-7">
+  <div className="flex flex-row flex-wrap gap-3 mt-7">
     {[
       {
         label: "Google Play", sub: "Get it on",
@@ -137,9 +137,7 @@ export default function About() {
             Fast, secure and reliable parcel delivery platform designed for
             modern logistics across Liberia.
           </p>
-
-         
-          
+ 
         </div>
       </section>
 
@@ -208,7 +206,6 @@ export default function About() {
       {/* ── APP FEATURES ── */}
       <section className="py-20 bg-[#F7F8FA]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-
           <div className="text-center max-w-[520px] mx-auto">
             <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
               style={{ fontFamily: "'Syne', sans-serif" }}>
@@ -250,14 +247,11 @@ export default function About() {
       {/* ── APP MOCKUP ── */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-16 items-center">
-
-          {/* TEXT */}
           <div>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full bg-blue-50 text-[#1A6FD4] mb-4">
               <span className="w-[5px] h-[5px] rounded-full bg-[#1A6FD4]" />
               Mobile App
             </span>
-
             <h2
               className="text-[28px] md:text-[36px] font-bold text-[#0B1F4B] tracking-[-0.8px] leading-tight"
               style={{ fontFamily: "'Syne', sans-serif" }}
@@ -265,12 +259,10 @@ export default function About() {
               Experience Our{" "}
               <span className="text-[#E8212B]">App</span>
             </h2>
-
             <p className="mt-4 text-[14px] text-[#6B7280] font-light leading-relaxed max-w-md">
               Our app makes parcel delivery simple and fast with a smooth,
               intuitive and user-friendly interface built for everyone.
             </p>
-
             <div className="mt-6 space-y-3">
               {[
                 "Book a delivery in under 60 seconds",
@@ -288,11 +280,8 @@ export default function About() {
                 </div>
               ))}
             </div>
-
             <StoreButtons variant="light" />
           </div>
-
-          {/* IMAGE */}
           <div className="flex justify-center">
             <img
               src="/customer-app.png"
@@ -324,8 +313,24 @@ export default function About() {
                 Whether you're sending a parcel or looking to earn — Safe Delivery has you covered.
               </p>
             </div>
-            <div className="shrink-0">
-              <StoreButtons variant="dark" />
+            {/* ✅ flex-row on all screens */}
+            <div className="shrink-0 flex flex-row flex-wrap gap-3 justify-center">
+              {[
+                { label: "Google Play", sub: "Get it on" },
+                { label: "App Store", sub: "Download on the" },
+              ].map(({ label, sub }) => (
+                <div key={label}
+                  className="relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl cursor-not-allowed opacity-80 border bg-white/10 border-white/20">
+                  <div className="text-left leading-tight">
+                    <p className="text-[9px] text-white/50 uppercase tracking-widest">{sub}</p>
+                    <p className="text-[12px] font-semibold text-white"
+                      style={{ fontFamily: "'Syne', sans-serif" }}>{label}</p>
+                  </div>
+                  <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+                    Soon
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

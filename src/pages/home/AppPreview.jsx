@@ -1,5 +1,5 @@
 const StoreButtons = () => (
-  <div className="flex flex-wrap gap-3 mt-8">
+  <div className="flex gap-3 mt-8 justify-center md:justify-start">
     {[
       {
         sub: "GET IT ON",
