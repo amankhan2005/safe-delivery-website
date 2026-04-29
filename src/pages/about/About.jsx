@@ -1,0 +1,336 @@
+const StoreButtons = ({ variant = "light" }) => (
+  <div className="flex flex-wrap gap-3 mt-7">
+    {[
+      {
+        label: "Google Play", sub: "Get it on",
+        icon: (
+          <svg viewBox="0 0 24 24" fill={variant === "dark" ? "#fff" : "#374151"} width={20} height={20}>
+            <path d="M3.18 23.76c.3.17.65.2.98.08l11.65-6.73-2.62-2.62-10.01 9.27zm-1.85-20.1C1.12 4 1 4.37 1 4.8v14.4c0 .43.12.8.33 1.1l.07.07 8.07-8.07v-.19L1.4 3.64l-.07.02zM20.4 10.4l-2.29-1.32-2.91 2.91 2.91 2.91 2.31-1.33c.66-.38.66-1 0-1.38l-.02.01zM4.16.24L15.81 6.97l-2.62 2.62L3.18.31A1.1 1.1 0 014.16.24z"/>
+          </svg>
+        ),
+      },
+      {
+        label: "App Store", sub: "Download on the",
+        icon: (
+          <svg viewBox="0 0 24 24" fill={variant === "dark" ? "#fff" : "#374151"} width={20} height={20}>
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+        ),
+      },
+    ].map(({ label, sub, icon }) => (
+      <div key={label}
+        className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl cursor-not-allowed opacity-80 border ${
+          variant === "dark"
+            ? "bg-white/10 border-white/20"
+            : "bg-[#F1F3F5] border-[#E8EAED]"
+        }`}>
+        <div className="opacity-60 shrink-0">{icon}</div>
+        <div className="text-left leading-tight">
+          <p className={`text-[9px] uppercase tracking-widest ${variant === "dark" ? "text-white/50" : "text-[#9BA3AF]"}`}>{sub}</p>
+          <p className={`text-[12px] font-semibold ${variant === "dark" ? "text-white" : "text-[#374151]"}`}
+            style={{ fontFamily: "'Syne', sans-serif" }}>{label}</p>
+        </div>
+        <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+          Soon
+        </span>
+      </div>
+    ))}
+  </div>
+);
+
+const appFeatures = [
+  {
+    title: "Real-time Tracking",
+    tag: "Live", tagClass: "bg-green-50 text-[#16A34A]",
+    iconBg: "bg-green-50", hoverBar: "group-hover:bg-[#16A34A]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <circle cx="12" cy="10" r="3"/>
+        <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Secure OTP Delivery",
+    tag: "Verified", tagClass: "bg-red-50 text-[#E8212B]",
+    iconBg: "bg-red-50", hoverBar: "group-hover:bg-[#E8212B]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6L12 2z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Easy Booking",
+    tag: "Simple", tagClass: "bg-blue-50 text-[#1A6FD4]",
+    iconBg: "bg-blue-50", hoverBar: "group-hover:bg-[#1A6FD4]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <rect x="3" y="3" width="18" height="18" rx="3"/>
+        <path d="M8 12h8M12 8v8"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Cash on Delivery",
+    tag: "Flexible", tagClass: "bg-green-50 text-[#16A34A]",
+    iconBg: "bg-green-50", hoverBar: "group-hover:bg-[#16A34A]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <rect x="2" y="7" width="20" height="14" rx="2"/>
+        <path d="M16 7V5a2 2 0 00-4 0v2"/>
+        <path d="M12 12v4M10 14h4"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Order History",
+    tag: "Records", tagClass: "bg-amber-50 text-[#D97706]",
+    iconBg: "bg-amber-50", hoverBar: "group-hover:bg-[#D97706]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
+        <path d="M14 2v6h6M8 13h8M8 17h5"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Live Driver Updates",
+    tag: "Tracking", tagClass: "bg-blue-50 text-[#1A6FD4]",
+    iconBg: "bg-blue-50", hoverBar: "group-hover:bg-[#1A6FD4]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <rect x="1" y="3" width="15" height="13" rx="2"/>
+        <path d="M16 8h4l3 3v5h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    ),
+  },
+];
+
+export default function About() {
+  return (
+    <div className="bg-white">
+
+      {/* ── HERO HEADER ── */}
+      <section className="bg-[#F7F8FA] border-b border-[#E8EAED]">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-20 text-center">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full bg-blue-50 text-[#1A6FD4] mb-5">
+            <span className="w-[5px] h-[5px] rounded-full bg-[#1A6FD4]" />
+            Our Story
+          </span>
+          <h1
+            className="text-[36px] md:text-[52px] font-extrabold text-[#0B1F4B] leading-[1.05] tracking-[-2px]"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            About Safe Delivery
+          </h1>
+          <p className="mt-4 text-[#6B7280] text-[15px] font-light leading-relaxed max-w-xl mx-auto">
+            Fast, secure and reliable parcel delivery platform designed for
+            modern logistics across Liberia.
+          </p>
+
+         
+          
+        </div>
+      </section>
+
+      {/* ── COMPANY STORY ── */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="max-w-[720px] mx-auto">
+            <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold mb-3"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
+              Who We Are
+            </p>
+            <p className="text-[15px] text-[#374151] font-light leading-[1.85]">
+              Safe Delivery is a modern delivery platform that connects customers
+              with trusted drivers to ensure every parcel reaches safely and on
+              time. Our system is built to make logistics simple, fast and secure.
+            </p>
+            <p className="mt-4 text-[15px] text-[#374151] font-light leading-[1.85]">
+              We aim to simplify the delivery experience with real-time tracking,
+              secure verification, and flexible delivery options for both
+              customers and drivers across Liberia.
+            </p>
+
+            {/* Mission & Vision */}
+            <div className="mt-10 grid md:grid-cols-2 gap-5">
+              {[
+                {
+                  label: "Our Mission",
+                  text: "To make delivery services simple, fast and secure for everyone across Liberia.",
+                  bg: "bg-blue-50", tagClass: "bg-blue-50 text-[#1A6FD4]",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+                      strokeLinecap="round" strokeLinejoin="round" width={20} height={20}>
+                      <circle cx="12" cy="12" r="9"/>
+                      <path d="M12 8v4l3 3"/>
+                    </svg>
+                  ),
+                },
+                {
+                  label: "Our Vision",
+                  text: "To become the most trusted and reliable delivery platform across Africa.",
+                  bg: "bg-red-50", tagClass: "bg-red-50 text-[#E8212B]",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.6"
+                      strokeLinecap="round" strokeLinejoin="round" width={20} height={20}>
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  ),
+                },
+              ].map(({ label, text, bg, tagClass, icon }) => (
+                <div key={label}
+                  className={`p-6 rounded-[14px] border border-[#E8EAED] ${bg} bg-opacity-30`}>
+                  <div className={`inline-flex items-center gap-2 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full mb-4 ${tagClass}`}>
+                    <span className="w-[5px] h-[5px] rounded-full bg-current" />
+                    {label}
+                  </div>
+                  <div className="mb-3">{icon}</div>
+                  <p className="text-[13.5px] text-[#374151] font-light leading-[1.8]">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── APP FEATURES ── */}
+      <section className="py-20 bg-[#F7F8FA]">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+
+          <div className="text-center max-w-[520px] mx-auto">
+            <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
+              Platform Features
+            </p>
+            <h2
+              className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              App Features
+            </h2>
+            <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
+              Everything built to make delivery fast, safe and seamless.
+            </p>
+          </div>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {appFeatures.map(({ title, tag, tagClass, iconBg, hoverBar, icon }) => (
+              <div key={title}
+                className="group relative flex flex-col p-7 bg-white border border-[#E8EAED] rounded-[14px] hover:bg-[#FAFBFF] hover:border-[#C7DCFA] transition-colors duration-200 overflow-hidden">
+                <span className={`absolute top-0 left-0 right-0 h-[3px] transition-colors duration-200 ${hoverBar}`} />
+                <span className={`inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full w-fit mb-4 ${tagClass}`}>
+                  <span className="w-[5px] h-[5px] rounded-full bg-current" />
+                  {tag}
+                </span>
+                <div className={`w-[44px] h-[44px] rounded-[10px] flex items-center justify-center ${iconBg}`}>
+                  {icon}
+                </div>
+                <h3 className="mt-4 text-[15px] font-bold text-[#0B1F4B]"
+                  style={{ fontFamily: "'Syne', sans-serif" }}>
+                  {title}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── APP MOCKUP ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-16 items-center">
+
+          {/* TEXT */}
+          <div>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full bg-blue-50 text-[#1A6FD4] mb-4">
+              <span className="w-[5px] h-[5px] rounded-full bg-[#1A6FD4]" />
+              Mobile App
+            </span>
+
+            <h2
+              className="text-[28px] md:text-[36px] font-bold text-[#0B1F4B] tracking-[-0.8px] leading-tight"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Experience Our{" "}
+              <span className="text-[#E8212B]">App</span>
+            </h2>
+
+            <p className="mt-4 text-[14px] text-[#6B7280] font-light leading-relaxed max-w-md">
+              Our app makes parcel delivery simple and fast with a smooth,
+              intuitive and user-friendly interface built for everyone.
+            </p>
+
+            <div className="mt-6 space-y-3">
+              {[
+                "Book a delivery in under 60 seconds",
+                "Track your driver in real-time",
+                "Confirm receipt with secure OTP",
+              ].map((f) => (
+                <div key={f} className="flex items-center gap-2.5 text-[13.5px] text-[#374151]">
+                  <span className="w-[16px] h-[16px] rounded-full bg-[#1A6FD4] flex items-center justify-center shrink-0">
+                    <svg width="8" height="8" viewBox="0 0 9 9" fill="none">
+                      <path d="M2 4.5l1.8 1.8 3.2-3.2" stroke="#fff" strokeWidth="1.4"
+                        strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  {f}
+                </div>
+              ))}
+            </div>
+
+            <StoreButtons variant="light" />
+          </div>
+
+          {/* IMAGE */}
+          <div className="flex justify-center">
+            <img
+              src="/customer-app.png"
+              alt="Safe Delivery App"
+              className="h-[420px] w-auto object-contain"
+              style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.12))" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="py-20 bg-[#F7F8FA]">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
+                style={{ fontFamily: "'Syne', sans-serif" }}>
+                Get Started
+              </p>
+              <h2
+                className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                Join Safe Delivery{" "}
+                <span className="text-[#E8212B]">Today</span>
+              </h2>
+              <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
+                Whether you're sending a parcel or looking to earn — Safe Delivery has you covered.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <StoreButtons variant="dark" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}

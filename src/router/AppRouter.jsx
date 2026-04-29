@@ -1,50 +1,45 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import RouteScrollTop from "../components/RouteScrollTop";  
 
 // Pages
-import Home from "../pages/home/Home"
-import FeaturesPage from "../pages/features/FeaturesPage"
-import PricingPage from "../pages/pricing/PricingPage"
-import RegisterGymPage from "../pages/registerGym/RegisterGymPage"
-import LoginPage from "../pages/login/LoginPage"
-import Signup from "../pages/signup/signuppage"
-import ForgotPasswordPage from "../pages/ForgotPassword/ForgotPasswordPage"
+import Home from "../pages/home/Home";
+import Customer from "../pages/customer/Customer";
+import Drivers from "../pages/drivers/Drivers";
+import About from "../pages/about/About";
+import Support from "../pages/support/Support";
+import Download from "../pages/download/Download";
+import Privacy from "../pages/PrivacyPage";
 
-import DownloadAppPage from "../pages/download/DownloadAppPage"
-import ContactPage from "../pages/contact/ContactPage"
-import CheckoutPage from "../pages/checkout/CheckoutPage"
-import PaymentSuccess from "../pages/payment/PaymentSuccess"
-import PaymentFailed from "../pages/payment/PaymentFailed"
-import Privacy from "../pages/PrivacyPage"
+// 🔹 Layout Wrapper
+function Layout({ children }) {
+  return (
+    <>
+      <RouteScrollTop /> {/* ✅ IMPORTANT */}
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
+}
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Home />} />
-
-        <Route path="/features" element={<FeaturesPage />} />
-
-        <Route path="/pricing" element={<PricingPage />} />
-
-        <Route path="/register-gym" element={<RegisterGymPage />} />
-
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-
-        <Route path="/download" element={<DownloadAppPage />} />
-
-        <Route path="/contact" element={<ContactPage />} />
-
-        <Route path="/checkout" element={<CheckoutPage />} />
-
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-
-        <Route path="/payment-failed" element={<PaymentFailed />} />
-        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/customer" element={<Layout><Customer /></Layout>} />
+        <Route path="/drivers" element={<Layout><Drivers /></Layout>} />
+        <Route path="/about" element={<Layout><About /></Layout>} />
+        <Route path="/support" element={<Layout><Support /></Layout>} />
+        <Route path="/download" element={<Layout><Download /></Layout>} />
+        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
 
       </Routes>
     </BrowserRouter>
-  )
+  );
 }

@@ -1,37 +1,27 @@
- import Navbar from "../../components/layout/Navbar"
-  import Topbar from "../../components/layout/TopBar"
+ import HeroSection from "./HeroSection";
+import Services from "./service";
+import WhyChooseUs from "./whychooseus";
+import AppPreview from "./AppPreview";
+import FAQ from "./faqsection";
 
-import Footer from "../../components/layout/Footer"
-
-import HeroSection from "./HeroSection"
-import StatsSection from "./StatsSection"
-import ProblemSection from "./ProblemSection"
-import FeaturesSection from "./FeaturesSection"
-import AppPreviewSection from "./AppPreviewSection"
-import PricingSection from "./PricingSection"
-import CTASection from "./CTASection"
- 
 export default function Home() {
   return (
-    <>
-    <Topbar/>
-      <Navbar />
+    <div>
 
+      {/* HERO */}
       <HeroSection />
 
-      <StatsSection />
+      {/* SERVICES */}
+      <Services />
 
-      <ProblemSection />
+      {/* WHY CHOOSE US */}
+      <WhyChooseUs />
 
-      <FeaturesSection />
+      {/* APP PREVIEW */}
+      <AppPreview />
+      {/* FAQ */}
+      <FAQ />
 
-      <AppPreviewSection />
-
-      <PricingSection />
-
-      <CTASection />
-
-      <Footer />
-    </>
-  )
+    </div>
+  );
 }

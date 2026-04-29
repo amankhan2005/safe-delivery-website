@@ -1,99 +1,197 @@
-  import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-// CSS Keyframes defined as a string
-const animations = `
-  @keyframes slideDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
-  @keyframes bounceSubtle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-  }
-`;
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/customer", label: "Customer" },
+  { to: "/drivers", label: "Drivers" },
+  { to: "/about", label: "About" },
+  { to: "/support", label: "Support" },
+];
 
 export default function Navbar() {
-  return (
-    <>
-      {/* Inject animations */}
-      <style>{animations}</style>
+  const [city, setCity] = useState(null);
+  const [locStatus, setLocStatus] = useState("idle"); // idle | loading | done | blocked
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
-      <nav 
-        className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#050805]/80 backdrop-blur-xl"
-        style={{ animation: "slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+  useEffect(() => {
+    setLocStatus("loading");
 
-          {/* 🟢 Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-2 group"
-          >
-            <div 
-              className="bg-green-500/20 p-2 rounded-lg group-hover:bg-green-500/30 transition"
-              style={{ transition: 'transform 0.2s' }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(-10deg) scale(1.1)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg) scale(1)'}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2a10 10 0 0 1 10 10c0 1.2-.4 2.3-1 3.2L19 12l-2 2 2.8 2.8c-.8.7-1.8 1.2-2.8 1.2a10 10 0 0 1-10-10c0-1.2.4-2.3 1-3.2L7 12l2-2L6.2 7.2c.8-.7 1.8-1.2 2.8-1.2z"/>
+    if (!navigator.geolocation) {
+      setLocStatus("blocked");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords: { latitude, longitude } }) => {
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en`
+          );
+          const d = await res.json();
+          const place =
+            d.address.city ||
+            d.address.town ||
+            d.address.village ||
+            d.address.county ||
+            "Liberia";
+          setCity(place);
+          setLocStatus("done");
+        } catch {
+          setCity("Liberia");
+          setLocStatus("done");
+        }
+      },
+      () => {
+        setLocStatus("blocked");
+      },
+      { timeout: 8000, maximumAge: 300000 }
+    );
+
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  const LocationPill = ({ mobile = false }) => (
+    <div className={`flex items-center gap-2 ${
+      mobile
+        ? "text-[11px] text-[#9BA3AF] px-2 pb-2 tracking-[1px] uppercase"
+        : "text-[12px] text-[#6B7280]"
+    }`}>
+      {locStatus === "loading" ? (
+        <>
+          <span className="w-[5px] h-[5px] rounded-full bg-amber-400 animate-pulse shrink-0" />
+          <span className={mobile ? "" : "hidden xl:inline"}>Locating...</span>
+        </>
+      ) : locStatus === "blocked" ? (
+        <>
+          <span className="w-[5px] h-[5px] rounded-full bg-[#E8EAED] shrink-0" />
+          <span className={mobile ? "" : "hidden xl:inline"}>Location off</span>
+        </>
+      ) : (
+        <>
+          <span className="relative flex h-[7px] w-[7px] shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
+            <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-green-500" />
+          </span>
+          <span className={mobile ? "" : "hidden xl:inline"}>{city}</span>
+          {!mobile && (
+            <span className="xl:hidden text-[#9BA3AF]">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
+                strokeWidth="1.5" strokeLinecap="round" width={12} height={12}>
+                <circle cx="7" cy="6" r="2.5"/>
+                <path d="M7 1a5 5 0 015 5c0 3.5-5 8-5 8S2 9.5 2 6a5 5 0 015-5z"/>
               </svg>
-            </div>
-
-            <span className="text-xl font-extrabold tracking-tight text-white">
-              GYM<span className="text-green-400 group-hover:text-green-300 transition-colors">CRAB</span>
             </span>
-          </Link>
-
-          {/* 🧭 Nav Links */}
-          <div className="hidden md:flex items-center gap-2 bg-white/5 px-2 py-1 rounded-full border border-white/10">
-            <NavLink to="/features">Features</NavLink>
-            <NavLink to="/pricing">Pricing</NavLink>
-            <NavLink to="/download">Download</NavLink>
-            <NavLink to="/contact">Support</NavLink>
-          </div>
-
-          {/* 🚀 Actions */}
-          <div className="flex items-center gap-4">
-
-            <Link
-              to="/login"
-              className="text-sm font-semibold text-gray-300 hover:text-green-400 transition-colors duration-300"
-            >
-              Sign in
-            </Link>
-
-            <Link
-              to="/register-gym"
-              className="relative hidden sm:block px-6 py-2.5 rounded-full text-sm font-bold text-black bg-green-400 overflow-hidden group transform hover:scale-105 active:scale-95 transition-transform duration-200"
-            >
-              <span className="relative z-10">Start Free Trial</span>
-
-              {/* Shine effect on hover */}
-              <span 
-                className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent 
-                           group-hover:left-full transition-all duration-700 ease-in-out"
-              ></span>
-            </Link>
-
-          </div>
-
-        </div>
-      </nav>
-    </>
+          )}
+        </>
+      )}
+    </div>
   );
-}
 
-function NavLink({ children, to }) {
   return (
-    <Link 
-      to={to} 
-      className="relative px-4 py-1.5 text-[13px] font-semibold text-gray-400 hover:text-white transition-colors duration-300 rounded-full hover:bg-white/10 overflow-hidden group"
-    >
-      {children}
-      {/* Animated Underline */}
-      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-green-400 group-hover:w-4 transition-all duration-300"></span>
-    </Link>
+    <header className={`sticky top-0 z-50 bg-white transition-all duration-200 ${
+      scrolled
+        ? "shadow-[0_1px_16px_rgba(0,0,0,0.07)]"
+        : "border-b border-[#E8EAED]"
+    }`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-[80px] gap-3">
+
+        {/* Logo */}
+        <Link to="/" className="flex items-center shrink-0">
+          <img src="/logo.png" alt="Safe Delivery" className="h-[58px] w-auto" />
+        </Link>
+
+        {/* Divider */}
+        <div className="hidden lg:block w-px h-7 bg-[#E8EAED] shrink-0" />
+
+        {/* Location */}
+        <div className="hidden lg:flex items-center shrink-0">
+          <LocationPill />
+        </div>
+
+        {/* Divider */}
+        <div className="hidden lg:block w-px h-7 bg-[#E8EAED] shrink-0" />
+
+        {/* Nav Links */}
+        <nav className="hidden lg:flex items-center flex-1 justify-center">
+          {NAV_LINKS.map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className={`relative text-[13px] px-4 py-1.5 tracking-[0.1px] transition-colors duration-150 ${
+                pathname === to
+                  ? "text-[#0D1117] font-medium"
+                  : "text-[#9BA3AF] hover:text-[#0D1117] font-normal"
+              }`}
+            >
+              {label}
+              {pathname === to && (
+                <span className="absolute bottom-[-1px] left-4 right-4 h-[1.5px] bg-[#1A6FD4]" />
+              )}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Download CTA */}
+        <Link
+          to="/download"
+          className="hidden lg:flex items-center gap-1.5 text-[12.5px] font-bold text-white bg-[#1A6FD4] px-5 py-[10px] rounded-[6px] hover:bg-[#1559B0] transition shrink-0"
+          style={{ fontFamily: "'Syne', sans-serif", letterSpacing: "0.5px" }}
+        >
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"
+            stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M1.5 9.5h9"/>
+          </svg>
+          Download App
+        </Link>
+
+        {/* Mobile Burger */}
+        <button
+          onClick={() => setOpen(o => !o)}
+          className="lg:hidden ml-auto flex flex-col gap-[5px] p-1.5 rounded-md hover:bg-slate-50 transition"
+          aria-label="Toggle menu"
+        >
+          {[0, 1, 2].map(i => (
+            <span key={i} className={`block w-5 h-[1.5px] bg-[#0D1117] rounded transition-all duration-200 ${
+              open && i === 0 ? "rotate-45 translate-y-[6.5px]" :
+              open && i === 1 ? "opacity-0" :
+              open && i === 2 ? "-rotate-45 -translate-y-[6.5px]" : ""
+            }`} />
+          ))}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="lg:hidden border-t border-[#E8EAED] bg-white px-6 pb-5 pt-3 flex flex-col gap-1">
+
+          {/* Location in mobile menu */}
+          <LocationPill mobile />
+
+          {NAV_LINKS.map(({ to, label }) => (
+            <Link key={to} to={to}
+              className={`px-3 py-2.5 rounded-[6px] text-[13.5px] transition ${
+                pathname === to
+                  ? "text-[#1A6FD4] font-medium bg-blue-50"
+                  : "text-[#6B7280] hover:bg-slate-50 hover:text-[#1A6FD4]"
+              }`}>
+              {label}
+            </Link>
+          ))}
+
+          <Link to="/download"
+            className="mt-3 text-center text-[13px] font-bold text-white bg-[#1A6FD4] py-2.5 rounded-[6px] hover:bg-[#1559B0] transition"
+            style={{ fontFamily: "'Syne', sans-serif" }}>
+            Download App
+          </Link>
+        </div>
+      )}
+    </header>
   );
 }

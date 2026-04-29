@@ -1,108 +1,195 @@
- import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gray-950 pt-16 pb-8 overflow-hidden border-t border-white/5">
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+    <footer className="bg-white border-t border-[#E8EAED] pt-16 pb-8">
+      <div className="max-w-[1280px] mx-auto px-8">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
-          {/* Brand Column */}
-          <div className="md:col-span-2">
-            <Link to="/" className="inline-block">
-              <motion.h3 
-                className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent"
-                whileHover={{ scale: 1.02 }}
-              >
-                GymCrab
-              </motion.h3>
-            </Link>
-            <p className="text-gray-400 mt-4 max-w-sm leading-relaxed">
-              The all-in-one smart gym management and fitness tracking platform. Run your gym smarter, grow faster.
+        {/* TOP GRID */}
+        <div className="grid md:grid-cols-4 gap-12">
+
+          {/* LOGO + ABOUT */}
+          <div>
+            <img src="/logo.png" alt="Safe Delivery" className="h-12 w-auto" />
+
+            <p className="mt-4 text-[13px] text-[#6B7280] font-light leading-[1.8] max-w-[220px]">
+              Fast, secure and reliable parcel delivery platform designed for modern logistics across Liberia.
             </p>
-            
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-6">
-              <SocialIcon>
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </SocialIcon>
-              <SocialIcon>
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </SocialIcon>
-              <SocialIcon>
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </SocialIcon>
+
+            {/* SOCIAL */}
+            <div className="flex gap-3 mt-6">
+              {[
+                { Icon: Facebook, href: "#" },
+                { Icon: Instagram, href: "#" },
+                { Icon: Linkedin, href: "#" },
+              ].map(({ Icon, href }) => (
+                <a
+                  key={href + Icon.displayName}
+                  href={href}
+                  className="w-[34px] h-[34px] flex items-center justify-center rounded-full border border-[#E8EAED] text-[#9BA3AF] hover:border-[#1A6FD4] hover:text-[#1A6FD4] transition-colors duration-150"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Platform Links */}
+          {/* QUICK LINKS */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Platform</h4>
+            <p
+              className="text-[11px] font-semibold tracking-[2px] uppercase text-[#0B1F4B] mb-5"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Quick Links
+            </p>
             <ul className="space-y-3">
-              <FooterLink to="/features">Features</FooterLink>
-              <FooterLink to="/pricing">Pricing</FooterLink>
-              <FooterLink to="/download">Download App</FooterLink>
+              {[
+                { to: "/", label: "Home" },
+                { to: "/customer", label: "Customer" },
+                { to: "/drivers", label: "Drivers" },
+                { to: "/about", label: "About" },
+                { to: "/support", label: "Support" },
+                { to: "/privacy", label: "Privacy Policy" },
+              ].map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-[13px] text-[#6B7280] font-light hover:text-[#1A6FD4] transition-colors duration-150"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* CONTACT */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Company</h4>
+            <p
+              className="text-[11px] font-semibold tracking-[2px] uppercase text-[#0B1F4B] mb-5"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Contact
+            </p>
             <ul className="space-y-3">
-              <FooterLink to="/contact">Contact Us</FooterLink>
-              <FooterLink to="/register-gym">Register Gym</FooterLink>
-              <FooterLink to="/privacy">Privacy Policy</FooterLink>
+              {[
+                {
+                  icon: (
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      width={14} height={14}>
+                      <circle cx="8" cy="7" r="2.5"/>
+                      <path d="M8 1a6 6 0 016 6c0 4-6 9-6 9S2 11 2 7a6 6 0 016-6z"/>
+                    </svg>
+                  ),
+                  text: "Monrovia, Liberia",
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      width={14} height={14}>
+                      <rect x="1" y="3" width="14" height="10" rx="2"/>
+                      <path d="M1 5l7 5 7-5"/>
+                    </svg>
+                  ),
+                  text: "support@safedelivery.com",
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      width={14} height={14}>
+                      <path d="M2 2.5C2 2.5 3 6 6 9s6.5 4 6.5 4l1.5-1.5-2.5-2.5-1.5 1c-.5-.3-1.8-1.2-2.5-2-.7-.8-1.7-2-2-2.5l1-1.5L4 2 2 2.5z"/>
+                    </svg>
+                  ),
+                  text: "+231-XXX-XXXX",
+                },
+              ].map(({ icon, text }) => (
+                <li key={text} className="flex items-center gap-2.5 text-[13px] text-[#6B7280] font-light">
+                  <span className="text-[#1A6FD4] shrink-0">{icon}</span>
+                  {text}
+                </li>
+              ))}
             </ul>
+          </div>
+
+          {/* DOWNLOAD APP */}
+          <div>
+            <p
+              className="text-[11px] font-semibold tracking-[2px] uppercase text-[#0B1F4B] mb-5"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Download App
+            </p>
+
+            <div className="flex flex-col gap-3">
+              {[
+                {
+                  sub: "GET IT ON",
+                  label: "Google Play",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="#374151" width={18} height={18}>
+                      <path d="M3.18 23.76c.3.17.65.2.98.08l11.65-6.73-2.62-2.62-10.01 9.27zm-1.85-20.1C1.12 4 1 4.37 1 4.8v14.4c0 .43.12.8.33 1.1l.07.07 8.07-8.07v-.19L1.4 3.64l-.07.02zM20.4 10.4l-2.29-1.32-2.91 2.91 2.91 2.91 2.31-1.33c.66-.38.66-1 0-1.38l-.02.01zM4.16.24L15.81 6.97l-2.62 2.62L3.18.31A1.1 1.1 0 014.16.24z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  sub: "DOWNLOAD ON THE",
+                  label: "App Store",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="#374151" width={18} height={18}>
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                  ),
+                },
+              ].map(({ sub, label, icon }) => (
+                <div
+                  key={label}
+                  className="relative flex items-center gap-3 bg-[#F1F3F5] border border-[#E8EAED] px-4 py-2.5 rounded-[10px] cursor-not-allowed opacity-80"
+                >
+                  <div className="opacity-60 flex items-center justify-center shrink-0">
+                    {icon}
+                  </div>
+                  <div className="text-left leading-tight">
+                    <p className="text-[9px] text-[#9BA3AF] uppercase tracking-widest">{sub}</p>
+                    <p
+                      className="text-[12.5px] font-semibold text-[#374151]"
+                      style={{ fontFamily: "'Syne', sans-serif" }}
+                    >
+                      {label}
+                    </p>
+                  </div>
+                  <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+                    Soon
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © 2026 GymCrab. All rights reserved.
+        {/* BOTTOM */}
+        <div className="border-t border-[#E8EAED] mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-2">
+          <p className="text-[12.5px] text-[#9BA3AF] font-light">
+            © {new Date().getFullYear()} Safe Delivery. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-gray-500 text-sm">
-            Made with <span className="text-red-500 animate-pulse">❤</span> in India
-          </div>
+          <p className="text-[12.5px] text-[#9BA3AF] font-light">
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.webieapp.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#1A6FD4] font-medium hover:underline"
+            >
+              WebieApp
+            </a>
+          </p>
         </div>
 
       </div>
     </footer>
-  );
-}
-
-// --- Helper Components ---
-
-function FooterLink({ to, children }) {
-  return (
-    <li>
-      <Link 
-        to={to} 
-        className="text-gray-400 hover:text-green-400 transition-colors duration-300 relative group"
-      >
-        {children}
-        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300" />
-      </Link>
-    </li>
-  );
-}
-
-function SocialIcon({ children }) {
-  return (
-    <motion.a 
-      href="#" 
-      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-green-600 hover:border-green-600 transition-all duration-300"
-      whileHover={{ y: -3 }}
-    >
-      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        {children}
-      </svg>
-    </motion.a>
   );
 }
