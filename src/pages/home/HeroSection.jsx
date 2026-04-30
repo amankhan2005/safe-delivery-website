@@ -54,13 +54,13 @@ export default function Hero() {
         <div className="relative z-10 px-5 pt-10 pb-4 text-center">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white border border-[#E8EAED] px-3.5 py-1.5 rounded-full text-[11px] text-[#1A6FD4] font-semibold tracking-wide shadow-sm">
+          {/* <div className="inline-flex items-center gap-2 bg-white border border-[#E8EAED] px-3.5 py-1.5 rounded-full text-[11px] text-[#1A6FD4] font-semibold tracking-wide shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A6FD4] opacity-50" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1A6FD4]" />
             </span>
             Safe Delivery — Liberia
-          </div>
+          </div> */}
 
           {/* Heading */}
           <h1
@@ -170,13 +170,13 @@ export default function Hero() {
           <div className="z-10" ref={leftRef}>
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white border border-[#E8EAED] px-3.5 py-1.5 rounded-full text-[11px] text-[#1A6FD4] font-semibold tracking-wide shadow-sm">
+            {/* <div className="inline-flex items-center gap-2 bg-white border border-[#E8EAED] px-3.5 py-1.5 rounded-full text-[11px] text-[#1A6FD4] font-semibold tracking-wide shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A6FD4] opacity-50" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1A6FD4]" />
               </span>
               Safe Delivery — Liberia
-            </div>
+            </div> */}
 
             {/* Heading */}
             <h1
