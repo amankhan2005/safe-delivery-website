@@ -82,9 +82,9 @@ export default function WhyChooseUs() {
           >
             Why Choose Safe Delivery?
           </h2>
-          <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
-            We provide fast, secure and reliable delivery services you can trust across Liberia.
-          </p>
+         <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed whitespace-nowrap">
+  We provide fast, secure and reliable delivery services you can trust across Liberia.
+</p>
         </div>
 
         {/* Cards */}

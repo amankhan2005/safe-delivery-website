@@ -93,7 +93,7 @@ export default function AppPreview() {
             Mobile Apps
           </p>
           <h2
-            className="mt-2.5 text-[32px] md:text-[40px] font-bold text-[#0B1F4B] leading-tight tracking-[-0.8px]"
+            className="mt-2.5 text-[32px] md:text-[32px] font-bold text-[#0B1F4B] leading-tight tracking-[-0.8px]"
             style={{ fontFamily: "'Syne', sans-serif" }}
           >
             Everything You Need in One App
