@@ -144,9 +144,9 @@ export default function Privacy() {
               By using Safe Delivery, you agree to the collection and use of
               information in accordance with this policy. If you have any
               questions, please contact us at{" "}
-              <a href="mailto:support@safedelivery.com"
+              <a href="mailto:support@saferidedelivery.com"
                 className="text-[#1A6FD4] hover:underline">
-                support@safedelivery.com
+                support@saferidedelivery.com
               </a>.
             </p>
           </div>

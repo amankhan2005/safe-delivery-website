@@ -13,6 +13,7 @@ import About from "../pages/about/About";
 import Support from "../pages/support/Support";
 import Download from "../pages/download/Download";
 import Privacy from "../pages/PrivacyPage";
+import TermsAndPrivacy from "../pages/TermsAndPrivacy";
 
 // 🔹 Layout Wrapper
 function Layout({ children }) {
@@ -38,7 +39,7 @@ export default function AppRouter() {
         <Route path="/support" element={<Layout><Support /></Layout>} />
         <Route path="/download" element={<Layout><Download /></Layout>} />
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
-
+        <Route path="/terms-and-privacy" element={<Layout><TermsAndPrivacy /></Layout>} />
       </Routes>
     </BrowserRouter>
   );

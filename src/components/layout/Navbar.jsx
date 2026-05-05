@@ -10,89 +10,17 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [city, setCity] = useState(null);
-  const [locStatus, setLocStatus] = useState("idle"); // idle | loading | done | blocked
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setLocStatus("loading");
-
-    if (!navigator.geolocation) {
-      setLocStatus("blocked");
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      async ({ coords: { latitude, longitude } }) => {
-        try {
-          const res = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en`
-          );
-          const d = await res.json();
-          const place =
-            d.address.city ||
-            d.address.town ||
-            d.address.village ||
-            d.address.county ||
-            "Liberia";
-          setCity(place);
-          setLocStatus("done");
-        } catch {
-          setCity("Liberia");
-          setLocStatus("done");
-        }
-      },
-      () => {
-        setLocStatus("blocked");
-      },
-      { timeout: 8000, maximumAge: 300000 }
-    );
-
     const onScroll = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => setOpen(false), [pathname]);
-
-  const LocationPill = ({ mobile = false }) => (
-    <div className={`flex items-center gap-2 ${
-      mobile
-        ? "text-[11px] text-[#9BA3AF] px-2 pb-2 tracking-[1px] uppercase"
-        : "text-[12px] text-[#6B7280]"
-    }`}>
-      {locStatus === "loading" ? (
-        <>
-          <span className="w-[5px] h-[5px] rounded-full bg-amber-400 animate-pulse shrink-0" />
-          <span className={mobile ? "" : "hidden xl:inline"}>Locating...</span>
-        </>
-      ) : locStatus === "blocked" ? (
-        <>
-          <span className="w-[5px] h-[5px] rounded-full bg-[#E8EAED] shrink-0" />
-          <span className={mobile ? "" : "hidden xl:inline"}>Location off</span>
-        </>
-      ) : (
-        <>
-          <span className="relative flex h-[7px] w-[7px] shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
-            <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-green-500" />
-          </span>
-          <span className={mobile ? "" : "hidden xl:inline"}>{city}</span>
-          {!mobile && (
-            <span className="xl:hidden text-[#9BA3AF]">
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
-                strokeWidth="1.5" strokeLinecap="round" width={12} height={12}>
-                <circle cx="7" cy="6" r="2.5"/>
-                <path d="M7 1a5 5 0 015 5c0 3.5-5 8-5 8S2 9.5 2 6a5 5 0 015-5z"/>
-              </svg>
-            </span>
-          )}
-        </>
-      )}
-    </div>
-  );
 
   return (
     <header className={`sticky top-0 z-50 bg-white transition-all duration-200 ${
@@ -106,14 +34,6 @@ export default function Navbar() {
         <Link to="/" className="flex items-center shrink-0">
           <img src="/logo.png" alt="Safe Delivery" className="h-[58px] w-auto" />
         </Link>
-
-        {/* Divider */}
-        <div className="hidden lg:block w-px h-7 bg-[#E8EAED] shrink-0" />
-
-        {/* Location */}
-        <div className="hidden lg:flex items-center shrink-0">
-          <LocationPill />
-        </div>
 
         {/* Divider */}
         <div className="hidden lg:block w-px h-7 bg-[#E8EAED] shrink-0" />
@@ -170,10 +90,6 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="lg:hidden border-t border-[#E8EAED] bg-white px-6 pb-5 pt-3 flex flex-col gap-1">
-
-          {/* Location in mobile menu */}
-          <LocationPill mobile />
-
           {NAV_LINKS.map(({ to, label }) => (
             <Link key={to} to={to}
               className={`px-3 py-2.5 rounded-[6px] text-[13.5px] transition ${

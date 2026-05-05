@@ -50,7 +50,8 @@ export default function Footer() {
                 { to: "/drivers", label: "Drivers" },
                 { to: "/about", label: "About" },
                 { to: "/support", label: "Support" },
-                { to: "/privacy", label: "Privacy Policy" },
+                // { to: "/privacy", label: "Privacy Policy" },
+                { to: "/terms-and-privacy", label: "Terms & Conditions" },
               ].map(({ to, label }) => (
                 <li key={to}>
                   <Link
