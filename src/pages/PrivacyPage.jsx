@@ -227,7 +227,7 @@ export default function Privacy() {
               </p>
             </div>
             <a
-              href="mailto:support@safedelivery.com"
+              href="mailto:support@saferidedelivery.com"
               className="shrink-0 flex items-center gap-2 bg-[#1A6FD4] text-white text-[13px] font-bold px-6 py-3 rounded-[8px] hover:bg-[#1559B0] transition"
               style={{ fontFamily: "'Syne', sans-serif", letterSpacing: "0.4px" }}
             >

@@ -95,7 +95,7 @@ export default function Footer() {
                       <path d="M1 5l7 5 7-5"/>
                     </svg>
                   ),
-                  text: "support@safedelivery.com",
+                  text: "support@saferidedelivery.com",
                 },
                 {
                   icon: (

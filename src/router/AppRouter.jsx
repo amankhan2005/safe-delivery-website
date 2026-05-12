@@ -14,7 +14,7 @@ import Support from "../pages/support/Support";
 import Download from "../pages/download/Download";
 import Privacy from "../pages/PrivacyPage";
 import TermsAndPrivacy from "../pages/TermsAndPrivacy";
-
+import DeleteAccount from "../pages/delete-account";
 // 🔹 Layout Wrapper
 function Layout({ children }) {
   return (
@@ -40,6 +40,7 @@ export default function AppRouter() {
         <Route path="/download" element={<Layout><Download /></Layout>} />
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
         <Route path="/terms-and-privacy" element={<Layout><TermsAndPrivacy /></Layout>} />
+        <Route path="/delete-account" element={<Layout><DeleteAccount /></Layout>} />
       </Routes>
     </BrowserRouter>
   );
