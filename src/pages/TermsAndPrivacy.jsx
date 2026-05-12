@@ -273,7 +273,7 @@ export default function TermsAndPrivacy() {
               <MapPin /><span>Monrovia, Liberia</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs text-white/50 font-light">
-              <Phone /><span>+231-XXX-XXXX</span>
+              <Phone /><span>+231 555 608 623</span>
             </div>
             <a href="mailto:support@safedelivery.com" className="flex items-center gap-2.5 text-xs text-white/50 hover:text-white transition-colors font-light">
               <Mail /><span>support@safedelivery.com</span>
