@@ -7,18 +7,17 @@ function Modal({ type, message, onClose }) {
       <div className="bg-white rounded-[16px] p-8 w-full max-w-sm text-center border border-[#E8EAED]">
 
         {/* Icon */}
-        <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 ${
-          isSuccess ? "bg-green-50" : "bg-red-50"
-        }`}>
+        <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 ${isSuccess ? "bg-green-50" : "bg-red-50"
+          }`}>
           {isSuccess ? (
             <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.8"
               strokeLinecap="round" strokeLinejoin="round" width={26} height={26}>
-              <path d="M20 6L9 17l-5-5"/>
+              <path d="M20 6L9 17l-5-5" />
             </svg>
           ) : (
             <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.8"
               strokeLinecap="round" strokeLinejoin="round" width={26} height={26}>
-              <path d="M18 6L6 18M6 6l12 12"/>
+              <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           )}
         </div>
@@ -126,19 +125,29 @@ export default function Support() {
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
                       strokeLinecap="round" strokeLinejoin="round" width={20} height={20}>
-                      <rect x="2" y="4" width="20" height="16" rx="2"/>
-                      <path d="M2 7l10 7 10-7"/>
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="M2 7l10 7 10-7" />
                     </svg>
                   ),
                 },
                 {
                   label: "Call Us",
-                  value: "+231-XXX-XXXX",
-                  color: "#16A34A", bg: "bg-green-50",
+                  value: "+231 555 608 623",
+                  href: "tel:+231555608623",
+                  color: "#16A34A",
+                  bg: "bg-green-50",
                   icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
-                      strokeLinecap="round" strokeLinejoin="round" width={20} height={20}>
-                      <path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 4.18 2 2 0 015.09 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006.99 7l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#16A34A"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      width={20}
+                      height={20}
+                    >
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 4.18 2 2 0 015.09 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006.99 7l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
                     </svg>
                   ),
                 },
@@ -149,8 +158,8 @@ export default function Support() {
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.6"
                       strokeLinecap="round" strokeLinejoin="round" width={20} height={20}>
-                      <circle cx="12" cy="10" r="3"/>
-                      <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z"/>
+                      <circle cx="12" cy="10" r="3" />
+                      <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z" />
                     </svg>
                   ),
                 },
@@ -283,7 +292,7 @@ export default function Support() {
                     <>
                       <svg className="animate-spin" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" strokeWidth="2" width={16} height={16}>
-                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                       </svg>
                       Sending...
                     </>
@@ -293,7 +302,7 @@ export default function Support() {
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                         width={14} height={14}>
-                        <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+                        <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
                       </svg>
                     </>
                   )}
