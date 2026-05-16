@@ -38,7 +38,7 @@ export default function AppRouter() {
         <Route path="/about" element={<Layout><About /></Layout>} />
         <Route path="/support" element={<Layout><Support /></Layout>} />
         <Route path="/download" element={<Layout><Download /></Layout>} />
-        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
+        <Route path="/privacy-policy" element={<Layout><Privacy /></Layout>} />
         <Route path="/terms-and-privacy" element={<Layout><TermsAndPrivacy /></Layout>} />
         <Route path="/delete-account" element={<Layout><DeleteAccount /></Layout>} />
       </Routes>
