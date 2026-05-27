@@ -1,435 +1,329 @@
-import { useState } from "react";
-
-// ─── ICONS ────────────────────────────────────────────────────
-
-const MapPin = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z" />
+// ── Real Google Play SVG (official 4-color) ──
+const GooglePlayIcon = ({ size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <path d="M56 22L292 260 56 498c-5-5-8-12-8-19V41c0-7 3-14 8-19z" fill="#00D2FF"/>
+    <path d="M56 22l236 238 80-80L112 14C96 5 72 9 56 22z" fill="#00F076"/>
+    <path d="M56 498l236-238 80 80L112 506c-16 9-40 5-56-8z" fill="#FF3D57"/>
+    <path d="M372 180l-80 80 80 80 72-41c21-12 21-46 0-58l-72-61z" fill="#FFCA28"/>
   </svg>
 );
 
-const Calendar = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+// ── Real Apple iOS icon ──
+const AppleIcon = ({ size = 22, color = "#374151" }) => (
+  <svg width={size} height={size} viewBox="0 0 496.255 608.728" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M273.81 52.973C313.806.257 369.41 0 369.41 0s8.271 49.562-31.463 97.306c-42.426 50.98-90.649 42.638-90.649 42.638s-9.055-40.094 26.512-86.971zM252.385 174.662c20.576 0 58.764-28.284 108.471-28.284 85.562 0 119.222 60.883 119.222 60.883s-65.833 33.659-65.833 115.331c0 92.133 82.01 123.885 82.01 123.885s-57.328 161.357-134.762 161.357c-35.565 0-63.215-23.967-100.688-23.967-38.188 0-76.084 24.861-100.766 24.861C89.33 608.73 0 455.666 0 332.628c0-121.052 75.612-184.554 146.533-184.554 46.105 0 81.883 26.588 105.852 26.588z"
+      fill={color}
+    />
   </svg>
 );
 
-const Mail = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 7l10 7 10-7" />
-  </svg>
-);
+const CUSTOMER_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.safedelivery.customer&pcampaignid=web_share";
 
-const Phone = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-  </svg>
-);
+const StoreButtons = ({ variant = "light" }) => {
+  const isDark = variant === "dark";
+  return (
+    <div className="flex flex-wrap gap-3 mt-7">
+      {/* Google Play — live */}
+      <a
+        href={CUSTOMER_PLAY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl border transition-all duration-200 ${
+          isDark
+            ? "bg-white/15 border-white/30 hover:bg-white/25"
+            : "bg-white border-[#D1D5DB] hover:border-[#1A6FD4] hover:shadow-md"
+        }`}
+      >
+        <div className="shrink-0"><GooglePlayIcon size={20} /></div>
+        <div className="text-left leading-tight">
+          <p className={`text-[9px] uppercase tracking-widest ${isDark ? "text-white/50" : "text-[#9BA3AF]"}`}>Get it on</p>
+          <p className={`text-[12px] font-semibold ${isDark ? "text-white" : "text-[#374151]"}`}
+            style={{ fontFamily: "'Syne', sans-serif" }}>Google Play</p>
+        </div>
+        <span className="absolute -top-2.5 -right-2 flex items-center gap-1 bg-[#16A34A] text-white text-[8px] font-bold px-2 py-0.5 rounded-full tracking-wide whitespace-nowrap">
+          ↓ Download Now
+        </span>
+      </a>
 
-const AlertTriangle = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-    <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-  </svg>
-);
+      {/* App Store — soon */}
+      <div className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl border cursor-not-allowed opacity-75 ${
+        isDark ? "bg-white/10 border-white/20" : "bg-[#F1F3F5] border-[#E8EAED]"
+      }`}>
+        <div className="opacity-60 shrink-0">
+          <AppleIcon size={20} color={isDark ? "#fff" : "#374151"} />
+        </div>
+        <div className="text-left leading-tight">
+          <p className={`text-[9px] uppercase tracking-widest ${isDark ? "text-white/50" : "text-[#9BA3AF]"}`}>Download on the</p>
+          <p className={`text-[12px] font-semibold ${isDark ? "text-white" : "text-[#374151]"}`}
+            style={{ fontFamily: "'Syne', sans-serif" }}>App Store</p>
+        </div>
+        <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+          Soon
+        </span>
+      </div>
+    </div>
+  );
+};
 
-const Info = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" />
-  </svg>
-);
-
-// ─── DATA ────────────────────────────────────────────────────
-
-const sections = [
+const benefits = [
   {
-    num: "01", tag: "Services", color: "blue",
-    title: "Our Services",
-    body: [
-      { t: "p", v: "Safe Delivery connects customers with independent delivery partners through our technology platform. We act solely as a technology intermediary and do not directly employ delivery personnel." },
-      { t: "p", v: "Services provided include:" },
-      { t: "b", v: "Booking of parcel deliveries" },
-      { t: "b", v: "Real-time delivery tracking" },
-      { t: "b", v: "Cash on Delivery (COD) payments" },
-      { t: "b", v: "Access to a verified delivery rider network" },
-    ],
-    note: { type: "info", text: "Safe Delivery acts as a technology platform only — facilitating connections between customers and independent delivery partners." },
+    title: "Book in Seconds",
+    desc: "Enter pickup and drop-off, confirm your parcel details and you're done — booking takes under a minute.",
+    tag: "Fast", tagClass: "bg-blue-50 text-[#1A6FD4]",
+    hoverBar: "group-hover:bg-[#1A6FD4]", iconBg: "bg-blue-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9l-7-7z"/>
+        <path d="M13 2v7h7M9 12h6M9 16h4"/>
+      </svg>
+    ),
   },
   {
-    num: "02", tag: "User Responsibilities", color: "gray",
-    title: "User Responsibilities (Customers)",
-    body: [
-      { t: "p", v: "By using the Safe Delivery platform as a customer, you agree to:" },
-      { t: "b", v: "Provide accurate pickup and drop-off details at all times" },
-      { t: "b", v: "Refrain from sending prohibited or illegal items" },
-      { t: "b", v: "Ensure correct receiver details for OTP verification" },
-      { t: "b", v: "Cooperate fully throughout the delivery process" },
-    ],
-    note: { type: "warning", text: "Failure to comply with these obligations may result in delivery cancellation, account suspension, or permanent termination." },
+    title: "Live Tracking",
+    desc: "Watch your rider move in real-time on the map from pickup to your doorstep.",
+    tag: "Real-time", tagClass: "bg-blue-50 text-[#1A6FD4]",
+    hoverBar: "group-hover:bg-[#1A6FD4]", iconBg: "bg-blue-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <circle cx="12" cy="10" r="3"/>
+        <path d="M12 2a8 8 0 018 8c0 5-8 13-8 13S4 15 4 10a8 8 0 018-8z"/>
+      </svg>
+    ),
   },
   {
-    num: "03", tag: "Rider Responsibilities", color: "blue",
-    title: "Rider Responsibilities",
-    body: [
-      { t: "p", v: "All delivery riders operating on the Safe Delivery platform are contractually required to:" },
-      { t: "b", v: "Handle all parcels safely, securely, and professionally" },
-      { t: "b", v: "Maintain strict customer privacy at all times" },
-      { t: "b", v: "Deliver packages in their original condition, without tampering or damage" },
-      { t: "b", v: "Complete each delivery using the designated OTP verification process" },
-    ],
-    note: { type: "warning", text: "Any misconduct — including theft, tampering, or fraud — will result in permanent suspension from the platform and referral for legal action." },
+    title: "OTP Verified",
+    desc: "Your parcel is only handed over after a one-time PIN is confirmed — zero chance of wrong delivery.",
+    tag: "Secure", tagClass: "bg-green-50 text-[#16A34A]",
+    hoverBar: "group-hover:bg-[#16A34A]", iconBg: "bg-green-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6L12 2z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    ),
   },
   {
-    num: "04", tag: "Prohibited Items", color: "red",
-    title: "Prohibited Items",
-    body: [
-      { t: "p", v: "The following categories of items are strictly prohibited from being sent through the Safe Delivery platform under any circumstances:" },
-      { t: "b", v: "Weapons, firearms, or ammunition of any kind" },
-      { t: "b", v: "Illegal drugs or controlled substances" },
-      { t: "b", v: "Hazardous, flammable, or explosive materials" },
-      { t: "b", v: "Stolen, counterfeit, or fraudulently obtained goods" },
-      { t: "b", v: "Any item whose possession or transport is prohibited under Liberian law" },
-    ],
-    note: { type: "warning", text: "Sending prohibited items will result in immediate account termination and may give rise to criminal liability under applicable Liberian law." },
+    title: "Instant Notifications",
+    desc: "Get push alerts at every stage — accepted, picked up, en route, and delivered.",
+    tag: "Alerts", tagClass: "bg-amber-50 text-[#D97706]",
+    hoverBar: "group-hover:bg-[#D97706]", iconBg: "bg-amber-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 01-3.46 0"/>
+      </svg>
+    ),
   },
   {
-    num: "05", tag: "Payments & Charges", color: "amber",
-    title: "Payments & Charges",
-    body: [
-      { t: "p", v: "Delivery charges are calculated based on delivery distance and the selected service type. All applicable fees are displayed within the application prior to booking confirmation." },
-      { t: "b", v: "Cash on Delivery (COD) is supported on eligible orders" },
-      { t: "b", v: "Payment is due upon successful delivery completion" },
-      { t: "b", v: "Safe Delivery reserves the right to revise its pricing structure at any time" },
-    ],
-    note: { type: "info", text: "Current delivery rates will always be transparently displayed before you confirm any booking. No hidden charges apply." },
+    title: "Order History",
+    desc: "View all past deliveries, re-order with one tap and access delivery proof anytime.",
+    tag: "Records", tagClass: "bg-purple-50 text-[#7C3AED]",
+    hoverBar: "group-hover:bg-[#7C3AED]", iconBg: "bg-purple-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
+        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+      </svg>
+    ),
   },
   {
-    num: "06", tag: "Data Collection", color: "blue",
-    title: "Data Collection",
-    body: [
-      { t: "p", v: "Safe Delivery collects only the minimum data necessary to deliver our services effectively and securely." },
-      { t: "p", v: "Customer data collected:" },
-      { t: "b", v: "Full name, phone number, and email address" },
-      { t: "b", v: "Pickup and delivery location information" },
-      { t: "p", v: "Rider data collected:" },
-      { t: "b", v: "Full name, phone number, and email address" },
-      { t: "b", v: "Identity verification documents and selfie photograph" },
-      { t: "b", v: "Driving license details and registered vehicle information" },
-    ],
-  },
-  {
-    num: "07", tag: "Purpose of Data", color: "blue",
-    title: "Purpose of Data",
-    body: [
-      { t: "p", v: "All data collected by Safe Delivery is used exclusively for the following operational purposes:" },
-      { t: "b", v: "Identity verification and background screening" },
-      { t: "b", v: "Delivery coordination, dispatch, and routing" },
-      { t: "b", v: "Platform safety monitoring and fraud prevention" },
-      { t: "b", v: "Ongoing service quality improvement" },
-    ],
-    note: { type: "info", text: "Your data will never be used for marketing, advertising, or any purpose beyond what is stated in this policy without your explicit consent." },
-  },
-  {
-    num: "08", tag: "Privacy", color: "green",
-    title: "Privacy Policy",
-    body: [
-      { t: "p", v: "Safe Delivery is committed to protecting the privacy and personal data of all platform users." },
-      { t: "b", v: "All data is encrypted and stored on secured, access-controlled servers" },
-      { t: "b", v: "We do not sell, rent, or share user data with unauthorized third parties" },
-      { t: "b", v: "Location data is accessed solely during active delivery sessions" },
-      { t: "b", v: "Data is processed strictly for operational and legally mandated purposes" },
-    ],
-    note: { type: "info", text: "You have the right to request access to, correction of, or deletion of your personal data at any time. Contact support@safedelivery.com to exercise these rights." },
-  },
-  {
-    num: "09", tag: "Parcel Safety", color: "green",
-    title: "Parcel Safety",
-    body: [
-      { t: "p", v: "Safe Delivery implements the following measures to ensure the security and integrity of all parcels:" },
-      { t: "b", v: "All deliveries are handled exclusively by verified and screened riders" },
-      { t: "b", v: "OTP-based confirmation is required to complete each delivery" },
-      { t: "b", v: "Real-time tracking is available throughout the delivery process" },
-    ],
-    note: { type: "warning", text: "Safe Delivery accepts no liability for damage arising from improper packaging by the sender or the inclusion of undeclared prohibited items." },
-  },
-  {
-    num: "10", tag: "Account Suspension", color: "red",
-    title: "Account Suspension & Termination",
-    body: [
-      { t: "p", v: "Safe Delivery reserves the right to suspend or permanently terminate any user account under the following circumstances:" },
-      { t: "b", v: "Submission of false, misleading, or fraudulent information" },
-      { t: "b", v: "Attempted or completed shipment of prohibited items" },
-      { t: "b", v: "Detection of fraudulent activity or abuse of the platform" },
-      { t: "b", v: "Any breach of these Terms and Conditions" },
-    ],
-  },
-  {
-    num: "11", tag: "Limitation of Liability", color: "amber",
-    title: "Limitation of Liability",
-    body: [
-      { t: "p", v: "Safe Delivery operates solely as a technology facilitator connecting customers and independent delivery partners. Accordingly, Safe Delivery shall not be held liable for:" },
-      { t: "b", v: "Indirect, incidental, or consequential damages of any nature" },
-      { t: "b", v: "Delivery delays resulting from external factors including traffic, weather, or force majeure events" },
-    ],
-    note: { type: "info", text: "Our total liability in connection with any delivery service shall not exceed the delivery fee paid for that specific transaction." },
-  },
-  {
-    num: "12", tag: "Updates to Terms", color: "gray",
-    title: "Updates to Terms",
-    body: [
-      { t: "p", v: "Safe Delivery reserves the right to amend or update these Terms and Conditions at any time. Where material changes are made:" },
-      { t: "b", v: "Users will be notified through the application or our official website" },
-      { t: "b", v: "A minimum of 7 days' notice will be provided before material changes take effect" },
-      { t: "b", v: "Continued use of the platform following notification constitutes acceptance of the revised Terms" },
-    ],
+    title: "Trusted Riders",
+    desc: "All delivery partners are verified, rated and background-checked before onboarding.",
+    tag: "Verified", tagClass: "bg-red-50 text-[#E8212B]",
+    hoverBar: "group-hover:bg-[#E8212B]", iconBg: "bg-red-50",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E8212B" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M16 11l2 2 4-4"/>
+      </svg>
+    ),
   },
 ];
 
-// ─── COLOR CONFIG ─────────────────────────────────────────────
+const steps = [
+  {
+    step: "01", title: "Place Order",
+    desc: "Enter sender and receiver details, parcel info and confirm your booking in seconds.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    ),
+  },
+  {
+    step: "02", title: "Rider Picks Up",
+    desc: "A verified rider accepts your order and collects the parcel from the pickup location.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <rect x="1" y="3" width="15" height="13" rx="2"/>
+        <path d="M16 8h4l3 3v5h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    ),
+  },
+  {
+    step: "03", title: "Track & Receive",
+    desc: "Follow the live map, get notified on arrival and confirm delivery with your OTP.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6L12 2z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    ),
+  },
+];
 
-const colorConfig = {
-  blue: {
-    border: "border-l-[#1A6FD4]",
-    tag: "bg-blue-50 text-[#1A6FD4]",
-    dot: "bg-[#1A6FD4]",
-  },
-  red: {
-    border: "border-l-[#E8212B]",
-    tag: "bg-red-50 text-[#E8212B]",
-    dot: "bg-[#E8212B]",
-  },
-  amber: {
-    border: "border-l-[#D97706]",
-    tag: "bg-amber-50 text-[#D97706]",
-    dot: "bg-[#D97706]",
-  },
-  green: {
-    border: "border-l-[#16A34A]",
-    tag: "bg-green-50 text-[#16A34A]",
-    dot: "bg-[#16A34A]",
-  },
-  gray: {
-    border: "border-l-[#9BA3AF]",
-    tag: "bg-[#F1F3F5] text-[#374151]",
-    dot: "bg-[#9BA3AF]",
-  },
-};
-
-// ─── BODY RENDERER ────────────────────────────────────────────
-
-function RenderBody({ body, dotClass }) {
+export default function Customers() {
   return (
-    <div className="space-y-1">
-      {body.map((item, i) => {
-        if (item.t === "p") {
-          return (
-            <p key={i} className="text-[13.5px] text-[#374151] font-light leading-relaxed">
-              {item.v}
-            </p>
-          );
-        }
-        return (
-          <div key={i} className="flex items-start gap-3 py-0.5">
-            <span className={`w-[5px] h-[5px] rounded-full shrink-0 mt-[9px] ${dotClass}`} />
-            <span className="text-[13.5px] text-[#374151] font-light leading-relaxed">{item.v}</span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-// ─── NOTE ─────────────────────────────────────────────────────
-
-function Note({ note }) {
-  const isInfo = note.type === "info";
-  return (
-    <div
-      className={`flex items-start gap-3 rounded-xl px-4 py-3 mt-4 border ${
-        isInfo
-          ? "bg-blue-50 border-blue-100 text-[#1A3F72]"
-          : "bg-red-50 border-red-100 text-[#7a0000]"
-      }`}
-    >
-      <span className={`shrink-0 mt-0.5 ${isInfo ? "text-[#1A6FD4]" : "text-[#E8212B]"}`}>
-        {isInfo ? <Info /> : <AlertTriangle />}
-      </span>
-      <p className="text-[12px] font-normal leading-relaxed">{note.text}</p>
-    </div>
-  );
-}
-
-// ─── SECTION ROW ─────────────────────────────────────────────
-
-function SectionRow({ section }) {
-  const c = colorConfig[section.color];
-  return (
-    <div
-      className={`grid grid-cols-[56px_196px_1fr] border-b border-[#E8EAED] py-8 border-l-4 -ml-1 pl-4 hover:bg-[#FAFBFF] transition-colors duration-150 ${c.border}`}
-    >
-      {/* Number */}
-      <div className="pt-1">
-        <span className="text-[10.5px] font-mono font-bold text-[#C4C9D4]">{section.num}</span>
-      </div>
-
-      {/* Tag + Title */}
-      <div className="pr-6 pt-1">
-        <span
-          className={`inline-flex items-center gap-1.5 text-[9.5px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full mb-2.5 ${c.tag}`}
-          style={{ fontFamily: "'Syne', sans-serif" }}
-        >
-          <span className={`w-[5px] h-[5px] rounded-full bg-current`} />
-          {section.tag}
-        </span>
-        <p className="text-[13px] font-bold text-[#0B1F4B] leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>
-          {section.title}
-        </p>
-      </div>
-
-      {/* Body */}
-      <div>
-        <RenderBody body={section.body} dotClass={c.dot} />
-        {section.note && <Note note={section.note} />}
-      </div>
-    </div>
-  );
-}
-
-// ─── MAIN COMPONENT ───────────────────────────────────────────
-
-export default function TermsAndConditions() {
-  return (
-    <div className="bg-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');`}</style>
+    <div className="bg-white">
 
       {/* ── HERO ── */}
-      <section className="bg-[#0B1F4B] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(232,33,43,0.15) 0%, transparent 70%)" }} />
+      <section className="relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
 
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-20 md:py-28 text-center relative z-10">
+          {/* LEFT */}
+          <div className="z-10">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full bg-blue-50 text-[#1A6FD4] mb-4">
+              <span className="w-[5px] h-[5px] rounded-full bg-[#1A6FD4]" />
+              For Customers
+            </span>
+            <h1
+              className="text-[38px] md:text-[52px] lg:text-[60px] font-extrabold text-[#0B1F4B] leading-[1.04] tracking-[-2px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Deliver Anything,{" "}
+              <span className="text-[#1A6FD4]">Anywhere</span>{" "}
+              in Liberia
+            </h1>
+            <p className="mt-4 text-[#6B7280] text-[14px] leading-relaxed font-light max-w-md">
+              Book a delivery in seconds, track your parcel live and receive it
+              safely with OTP verification — all from your phone.
+            </p>
+            <StoreButtons variant="light" />
+          </div>
 
-          {/* Eyebrow badge */}
-          <span
-            className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/60 mb-6"
-            style={{ fontFamily: "'Syne', sans-serif" }}
-          >
-            <span className="w-[5px] h-[5px] rounded-full bg-[#E8212B]" />
-            Official Legal Document — Safe Delivery Platform
-          </span>
+          {/* RIGHT */}
+          <div className="flex justify-center">
+            <img
+              src="/customer-app.png"
+              alt="Customer App"
+              className="h-[400px] md:h-[480px] w-auto object-contain"
+              style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.12))" }}
+            />
+          </div>
+        </div>
+      </section>
 
-          {/* Headline */}
-          <h1
-            className="text-[44px] md:text-[64px] lg:text-[76px] font-extrabold text-white leading-[1.04] tracking-[-2.5px] mb-5"
-            style={{ fontFamily: "'Syne', sans-serif" }}
-          >
-            Terms &amp; <span className="text-[#E8212B]">Conditions</span>
-          </h1>
+      {/* ── BENEFITS ── */}
+      <section className="py-20 bg-[#F7F8FA]">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+          <div className="text-center max-w-[520px] mx-auto">
+            <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
+              style={{ fontFamily: "'Syne', sans-serif" }}>Why Customers Love Us</p>
+            <h2
+              className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Everything You Need for Safe Delivery
+            </h2>
+            <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
+              Built around trust, speed and complete peace of mind for every parcel.
+            </p>
+          </div>
 
-          <p className="text-[14px] font-light text-white/45 max-w-[500px] mx-auto leading-relaxed mb-14">
-            This document governs your use of the Safe Delivery platform and mobile applications. Please read carefully before using our services.
-          </p>
-
-          {/* Stats bar */}
-          <div className="flex flex-wrap justify-center divide-x divide-white/10 border-t border-white/10 pt-10 max-w-[680px] mx-auto">
-            {[
-              { label: "Jurisdiction", value: "Monrovia, Liberia" },
-              { label: "Effective Date", value: "May 2026" },
-              { label: "Last Updated", value: "May 2026" },
-              { label: "Applies To", value: "Customer & Rider Apps" },
-            ].map(({ label, value }) => (
-              <div key={label} className="flex-1 min-w-[140px] px-6 py-2 text-center">
-                <p className="text-[9.5px] uppercase tracking-[0.18em] font-semibold text-white/28 mb-1">{label}</p>
-                <p className="text-[12.5px] font-medium text-white/60">{value}</p>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {benefits.map(({ title, desc, iconBg, tagClass, tag, hoverBar, icon }) => (
+              <div key={title}
+                className="group relative flex flex-col p-7 bg-white border border-[#E8EAED] rounded-[14px] hover:bg-[#FAFBFF] hover:border-[#C7DCFA] transition-colors duration-200 overflow-hidden">
+                <span className={`absolute top-0 left-0 right-0 h-[3px] transition-colors duration-200 ${hoverBar}`} />
+                <span className={`inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full w-fit mb-4 ${tagClass}`}>
+                  <span className="w-[5px] h-[5px] rounded-full bg-current" />{tag}
+                </span>
+                <div className={`w-[44px] h-[44px] rounded-[10px] flex items-center justify-center ${iconBg}`}>{icon}</div>
+                <h3 className="mt-4 text-[15px] font-bold text-[#0B1F4B] tracking-[-0.2px]"
+                  style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8] flex-1">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── INTRO BAND ── */}
-      <div className="bg-[#F7F8FA] border-b border-[#E8EAED] px-6 md:px-10 py-5 text-center">
-        <p className="text-[13px] font-light text-[#374151] leading-relaxed max-w-[820px] mx-auto">
-          Safe Delivery operates through the{" "}
-          <span className="font-semibold text-[#0B1F4B]">Safe Delivery Customer App</span> and the{" "}
-          <span className="font-semibold text-[#0B1F4B]">Safe Delivery Driver (Rider) App</span>. By accessing or using either application, you acknowledge that you have read, understood, and agree to be legally bound by these Terms and Conditions. If you do not agree, please discontinue use of the platform immediately. For queries, contact{" "}
-          <a href="mailto:support@safedelivery.com" className="text-[#1A6FD4] font-medium hover:underline">
-            support@safedelivery.com
-          </a>.
-        </p>
-      </div>
+      {/* ── HOW IT WORKS ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+          <div className="text-center max-w-[520px] mx-auto">
+            <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
+              style={{ fontFamily: "'Syne', sans-serif" }}>Simple Process</p>
+            <h2
+              className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              How It Works
+            </h2>
+            <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
+              Three simple steps to get your parcel delivered safely.
+            </p>
+          </div>
 
-      {/* ── SECTIONS TABLE ── */}
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-10">
-
-        {/* Column headers */}
-        <div className="grid grid-cols-[56px_196px_1fr] border-b-2 border-[#0B1F4B] pb-3 mb-0 ml-3">
-          {["No.", "Section", "Provisions"].map((h) => (
-            <span key={h} className="text-[9px] tracking-[0.2em] uppercase font-bold text-[#0B1F4B]"
-              style={{ fontFamily: "'Syne', sans-serif" }}>{h}</span>
-          ))}
+          <div className="mt-12 grid md:grid-cols-3 gap-6 relative">
+            <div className="hidden md:block absolute top-[52px] left-[calc(16.66%+24px)] right-[calc(16.66%+24px)] h-px border-t border-dashed border-[#E8EAED] z-0" />
+            {steps.map(({ step, title, desc, icon }) => (
+              <div key={step}
+                className="relative z-10 flex flex-col items-center text-center p-8 bg-white border border-[#E8EAED] rounded-[14px] hover:border-[#C7DCFA] hover:shadow-[0_8px_32px_rgba(26,111,212,0.08)] transition-all duration-200">
+                <div className="w-[52px] h-[52px] rounded-full bg-blue-50 border border-[#DBEAFE] flex items-center justify-center mb-4">
+                  <span className="text-[13px] font-bold text-[#1A6FD4]"
+                    style={{ fontFamily: "'Syne', sans-serif" }}>{step}</span>
+                </div>
+                <div className="w-[40px] h-[40px] rounded-[10px] bg-[#F7F8FA] flex items-center justify-center mb-4">{icon}</div>
+                <h3 className="text-[15px] font-bold text-[#0B1F4B]"
+                  style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8]">{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Rows */}
-        <div className="ml-1">
-          {sections.map((s) => (
-            <SectionRow key={s.num} section={s} />
-          ))}
-        </div>
-      </div>
-
-      {/* ── FOOTER ── */}
-      <footer className="bg-[#0B1F4B] mt-6 px-6 md:px-10 py-16">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
-
-            {/* Left */}
+      {/* ── CTA ── */}
+      <section className="py-20 bg-[#F7F8FA]">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+          <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
             <div>
-              <p
-                className="text-[9.5px] tracking-[0.2em] uppercase text-[#E8212B] font-semibold mb-3"
+              <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
+                style={{ fontFamily: "'Syne', sans-serif" }}>Get Started Today</p>
+              <h2
+                className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
                 style={{ fontFamily: "'Syne', sans-serif" }}
               >
-                Contact &amp; Support
-              </p>
-              <h3
-                className="text-[26px] md:text-[30px] font-bold text-white leading-tight tracking-[-0.5px] mb-3"
-                style={{ fontFamily: "'Syne', sans-serif" }}
-              >
-                Questions About <span className="text-[#E8212B]">These Terms?</span>
-              </h3>
-              <p className="text-[13px] font-light text-white/40 max-w-[340px] leading-relaxed">
-                Our support team is available to clarify any provisions of these Terms or your rights under our Privacy Policy.
+                Send Your First Parcel{" "}
+                <span className="text-[#1A6FD4]">Now</span>
+              </h2>
+              <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
+                Download the Safe Delivery app and book your first delivery in
+                under a minute — fast, safe and reliable across Liberia.
               </p>
             </div>
-
-            {/* Right */}
-            <div className="flex flex-col gap-3.5 shrink-0">
-              <div className="flex items-center gap-2.5 text-[12.5px] text-white/45 font-light">
-                <MapPin /><span>Monrovia, Liberia</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-[12.5px] text-white/45 font-light">
-                <Phone /><span>+231-XXX-XXXX</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-[12.5px] text-white/45 font-light">
-                <Mail /><span>support@safedelivery.com</span>
-              </div>
-              <a
-                href="mailto:support@safedelivery.com"
-                className="mt-2 inline-flex items-center gap-2 bg-[#E8212B] hover:bg-[#c81820] text-white text-[11.5px] font-semibold px-6 py-3 rounded-xl transition-colors uppercase tracking-[0.08em]"
-                style={{ fontFamily: "'Syne', sans-serif" }}
-              >
-                <Mail size={13} /> Contact Support
-              </a>
+            <div className="shrink-0">
+              <StoreButtons variant="dark" />
             </div>
-          </div>
-
-          {/* Bottom bar */}
-          <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-2">
-            <p className="text-[11px] text-white/20 font-light">© 2026 Safe Delivery. All rights reserved.</p>
-            <p className="text-[11px] text-white/20 font-light">Last updated: May 2026</p>
           </div>
         </div>
-      </footer>
+      </section>
+
     </div>
   );
 }

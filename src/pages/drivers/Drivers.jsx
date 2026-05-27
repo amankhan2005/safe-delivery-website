@@ -1,42 +1,78 @@
-const StoreButtons = ({ variant = "light" }) => (
-  <div className="flex flex-wrap gap-3 mt-7">
-    {[
-      {
-        label: "Google Play", sub: "Get it on",
-        icon: (
-          <svg viewBox="0 0 24 24" fill={variant === "dark" ? "#fff" : "#374151"} width={20} height={20}>
-            <path d="M3.18 23.76c.3.17.65.2.98.08l11.65-6.73-2.62-2.62-10.01 9.27zm-1.85-20.1C1.12 4 1 4.37 1 4.8v14.4c0 .43.12.8.33 1.1l.07.07 8.07-8.07v-.19L1.4 3.64l-.07.02zM20.4 10.4l-2.29-1.32-2.91 2.91 2.91 2.91 2.31-1.33c.66-.38.66-1 0-1.38l-.02.01zM4.16.24L15.81 6.97l-2.62 2.62L3.18.31A1.1 1.1 0 014.16.24z"/>
-          </svg>
-        ),
-      },
-      {
-        label: "App Store", sub: "Download on the",
-        icon: (
-          <svg viewBox="0 0 24 24" fill={variant === "dark" ? "#fff" : "#374151"} width={20} height={20}>
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-        ),
-      },
-    ].map(({ label, sub, icon }) => (
-      <div key={label}
-        className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl cursor-not-allowed opacity-80 border ${
-          variant === "dark"
-            ? "bg-white/10 border-white/20"
-            : "bg-[#F1F3F5] border-[#E8EAED]"
-        }`}>
-        <div className="opacity-60 shrink-0">{icon}</div>
-        <div className="text-left leading-tight">
-          <p className={`text-[9px] uppercase tracking-widest ${variant === "dark" ? "text-white/50" : "text-[#9BA3AF]"}`}>{sub}</p>
-          <p className={`text-[12px] font-semibold ${variant === "dark" ? "text-white" : "text-[#374151]"}`}
-            style={{ fontFamily: "'Syne', sans-serif" }}>{label}</p>
-        </div>
-        <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
-          Soon
-        </span>
-      </div>
-    ))}
-  </div>
+// ── Real Google Play SVG (official 4-color) ──
+const GooglePlayIcon = ({ size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <path d="M56 22L292 260 56 498c-5-5-8-12-8-19V41c0-7 3-14 8-19z" fill="#00D2FF"/>
+    <path d="M56 22l236 238 80-80L112 14C96 5 72 9 56 22z" fill="#00F076"/>
+    <path d="M56 498l236-238 80 80L112 506c-16 9-40 5-56-8z" fill="#FF3D57"/>
+    <path d="M372 180l-80 80 80 80 72-41c21-12 21-46 0-58l-72-61z" fill="#FFCA28"/>
+  </svg>
 );
+
+// ── Real Apple iOS icon ──
+const AppleIcon = ({ size = 22, color = "#374151" }) => (
+  <svg width={size} height={size} viewBox="0 0 496.255 608.728" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M273.81 52.973C313.806.257 369.41 0 369.41 0s8.271 49.562-31.463 97.306c-42.426 50.98-90.649 42.638-90.649 42.638s-9.055-40.094 26.512-86.971zM252.385 174.662c20.576 0 58.764-28.284 108.471-28.284 85.562 0 119.222 60.883 119.222 60.883s-65.833 33.659-65.833 115.331c0 92.133 82.01 123.885 82.01 123.885s-57.328 161.357-134.762 161.357c-35.565 0-63.215-23.967-100.688-23.967-38.188 0-76.084 24.861-100.766 24.861C89.33 608.73 0 455.666 0 332.628c0-121.052 75.612-184.554 146.533-184.554 46.105 0 81.883 26.588 105.852 26.588z"
+      fill={color}
+    />
+  </svg>
+);
+
+// ── Reusable store buttons ──
+// playUrl: if provided → live Google Play link; variant: "light" | "dark"
+const StoreButtons = ({ playUrl, variant = "light" }) => {
+  const isDark = variant === "dark";
+
+  const playBtn = (
+    <a
+      href={playUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl border transition-all duration-200 ${
+        isDark
+          ? "bg-white/15 border-white/30 hover:bg-white/25"
+          : "bg-white border-[#D1D5DB] hover:border-[#1A6FD4] hover:shadow-md"
+      }`}
+    >
+      <div className="shrink-0"><GooglePlayIcon size={20} /></div>
+      <div className="text-left leading-tight">
+        <p className={`text-[9px] uppercase tracking-widest ${isDark ? "text-white/50" : "text-[#9BA3AF]"}`}>Get it on</p>
+        <p className={`text-[12px] font-semibold ${isDark ? "text-white" : "text-[#374151]"}`}
+          style={{ fontFamily: "'Syne', sans-serif" }}>Google Play</p>
+      </div>
+      <span className="absolute -top-2.5 -right-2 flex items-center gap-1 bg-[#16A34A] text-white text-[8px] font-bold px-2 py-0.5 rounded-full tracking-wide whitespace-nowrap">
+        ↓ Download Now
+      </span>
+    </a>
+  );
+
+  const appStoreBtn = (
+    <div
+      className={`relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl border cursor-not-allowed opacity-75 ${
+        isDark ? "bg-white/10 border-white/20" : "bg-[#F1F3F5] border-[#E8EAED]"
+      }`}
+    >
+      <div className="opacity-60 shrink-0">
+        <AppleIcon size={20} color={isDark ? "#fff" : "#374151"} />
+      </div>
+      <div className="text-left leading-tight">
+        <p className={`text-[9px] uppercase tracking-widest ${isDark ? "text-white/50" : "text-[#9BA3AF]"}`}>Download on the</p>
+        <p className={`text-[12px] font-semibold ${isDark ? "text-white" : "text-[#374151]"}`}
+          style={{ fontFamily: "'Syne', sans-serif" }}>App Store</p>
+      </div>
+      <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+        Soon
+      </span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-wrap gap-3 mt-7">
+      {playBtn}
+      {appStoreBtn}
+    </div>
+  );
+};
 
 const benefits = [
   {
@@ -130,8 +166,7 @@ const benefits = [
 
 const steps = [
   {
-    step: "01",
-    title: "Sign Up",
+    step: "01", title: "Sign Up",
     desc: "Register as a delivery partner and complete your profile verification.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
@@ -143,8 +178,7 @@ const steps = [
     ),
   },
   {
-    step: "02",
-    title: "Accept Orders",
+    step: "02", title: "Accept Orders",
     desc: "Receive nearby delivery requests in real-time and accept at your convenience.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
@@ -155,8 +189,7 @@ const steps = [
     ),
   },
   {
-    step: "03",
-    title: "Deliver & Earn",
+    step: "03", title: "Deliver & Earn",
     desc: "Complete the delivery with OTP confirmation and get paid instantly.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FD4" strokeWidth="1.6"
@@ -169,6 +202,8 @@ const steps = [
   },
 ];
 
+const RIDER_PLAY_URL = "https://play.google.com/store/apps/details?id=com.saferidedelivery.rider&pcampaignid=web_share";
+
 export default function Drivers() {
   return (
     <div className="bg-white">
@@ -176,34 +211,24 @@ export default function Drivers() {
       {/* ── HERO ── */}
       <section className="relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-
-          {/* LEFT */}
           <div className="z-10">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full bg-red-50 text-[#E8212B] mb-4">
               <span className="w-[5px] h-[5px] rounded-full bg-[#E8212B]" />
               For Drivers
             </span>
-
             <h1
               className="text-[38px] md:text-[52px] lg:text-[60px] font-extrabold text-[#0B1F4B] leading-[1.04] tracking-[-2px]"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
-              Earn More with{" "}
-              Flexible{" "}
+              Earn More with Flexible{" "}
               <span className="text-[#E8212B]">Delivery Jobs</span>
             </h1>
-
             <p className="mt-4 text-[#6B7280] text-[14px] leading-relaxed font-light max-w-md">
               Join as a delivery partner, accept orders and earn money on your
               own schedule with full flexibility.
             </p>
-
-             
-
-            <StoreButtons variant="light" />
+            <StoreButtons playUrl={RIDER_PLAY_URL} variant="light" />
           </div>
-
-          {/* RIGHT */}
           <div className="flex justify-center">
             <img
               src="/driver-app.png"
@@ -218,42 +243,27 @@ export default function Drivers() {
       {/* ── BENEFITS ── */}
       <section className="py-20 bg-[#F7F8FA]">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-
           <div className="text-center max-w-[520px] mx-auto">
             <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
-              style={{ fontFamily: "'Syne', sans-serif" }}>
-              Driver Benefits
-            </p>
-            <h2
-              className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              Everything You Need to Earn
-            </h2>
+              style={{ fontFamily: "'Syne', sans-serif" }}>Driver Benefits</p>
+            <h2 className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}>Everything You Need to Earn</h2>
             <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
               Designed to give you full control, flexibility and a steady income.
             </p>
           </div>
-
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {benefits.map(({ title, desc, iconBg, tagClass, tag, hoverBar, icon }) => (
               <div key={title}
                 className="group relative flex flex-col p-7 bg-white border border-[#E8EAED] rounded-[14px] hover:bg-[#FAFBFF] hover:border-[#C7DCFA] transition-colors duration-200 overflow-hidden">
                 <span className={`absolute top-0 left-0 right-0 h-[3px] transition-colors duration-200 ${hoverBar}`} />
                 <span className={`inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.5px] px-2.5 py-1 rounded-full w-fit mb-4 ${tagClass}`}>
-                  <span className="w-[5px] h-[5px] rounded-full bg-current" />
-                  {tag}
+                  <span className="w-[5px] h-[5px] rounded-full bg-current" />{tag}
                 </span>
-                <div className={`w-[44px] h-[44px] rounded-[10px] flex items-center justify-center ${iconBg}`}>
-                  {icon}
-                </div>
+                <div className={`w-[44px] h-[44px] rounded-[10px] flex items-center justify-center ${iconBg}`}>{icon}</div>
                 <h3 className="mt-4 text-[15px] font-bold text-[#0B1F4B] tracking-[-0.2px]"
-                  style={{ fontFamily: "'Syne', sans-serif" }}>
-                  {title}
-                </h3>
-                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8] flex-1">
-                  {desc}
-                </p>
+                  style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8] flex-1">{desc}</p>
               </div>
             ))}
           </div>
@@ -263,102 +273,56 @@ export default function Drivers() {
       {/* ── HOW IT WORKS ── */}
       <section className="py-20 bg-white">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-
           <div className="text-center max-w-[520px] mx-auto">
             <p className="text-[10px] tracking-[3px] uppercase text-[#9BA3AF] font-semibold"
-              style={{ fontFamily: "'Syne', sans-serif" }}>
-              Simple Process
-            </p>
-            <h2
-              className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              How It Works
-            </h2>
+              style={{ fontFamily: "'Syne', sans-serif" }}>Simple Process</p>
+            <h2 className="mt-2.5 text-[28px] md:text-[32px] font-bold text-[#0B1F4B] tracking-[-0.5px]"
+              style={{ fontFamily: "'Syne', sans-serif" }}>How It Works</h2>
             <p className="mt-2.5 text-[14px] text-[#6B7280] font-light leading-relaxed">
               Three simple steps to start earning with Safe Delivery.
             </p>
           </div>
-
           <div className="mt-12 grid md:grid-cols-3 gap-6 relative">
-
-            {/* Connector line — desktop only */}
             <div className="hidden md:block absolute top-[52px] left-[calc(16.66%+24px)] right-[calc(16.66%+24px)] h-px border-t border-dashed border-[#E8EAED] z-0" />
-
             {steps.map(({ step, title, desc, icon }) => (
               <div key={step}
                 className="relative z-10 flex flex-col items-center text-center p-8 bg-white border border-[#E8EAED] rounded-[14px] hover:border-[#C7DCFA] hover:shadow-[0_8px_32px_rgba(26,111,212,0.08)] transition-all duration-200">
-
-                {/* Step number */}
                 <div className="w-[52px] h-[52px] rounded-full bg-blue-50 border border-[#DBEAFE] flex items-center justify-center mb-4">
                   <span className="text-[13px] font-bold text-[#1A6FD4]"
                     style={{ fontFamily: "'Syne', sans-serif" }}>{step}</span>
                 </div>
-
-                <div className="w-[40px] h-[40px] rounded-[10px] bg-[#F7F8FA] flex items-center justify-center mb-4">
-                  {icon}
-                </div>
-
+                <div className="w-[40px] h-[40px] rounded-[10px] bg-[#F7F8FA] flex items-center justify-center mb-4">{icon}</div>
                 <h3 className="text-[15px] font-bold text-[#0B1F4B]"
-                  style={{ fontFamily: "'Syne', sans-serif" }}>
-                  {title}
-                </h3>
-                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8]">
-                  {desc}
-                </p>
+                  style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="mt-2 text-[13px] text-[#6B7280] font-light leading-[1.8]">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-    
-     {/* ── CTA ── */}
-<section className="py-20 bg-[#F7F8FA]">
-  <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-    <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
-
-      <div>
-        <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
-          style={{ fontFamily: "'Syne', sans-serif" }}>
-          Join Our Network
-        </p>
-        <h2
-          className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
-          style={{ fontFamily: "'Syne', sans-serif" }}
-        >
-          Start Earning{" "}
-          <span className="text-[#E8212B]">Today</span>
-        </h2>
-        <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
-          Join our growing network of drivers and start earning with
-          flexible delivery jobs across Liberia.
-        </p>
-      </div>
-
-      {/* ✅ flex-row on all screens */}
-      <div className="flex flex-row flex-wrap gap-3 shrink-0 justify-center">
-        {[
-          { label: "Google Play", sub: "Get it on" },
-          { label: "App Store", sub: "Download on the" },
-        ].map(({ label, sub }) => (
-          <div key={label}
-            className="relative flex items-center gap-2.5 px-3.5 py-2 rounded-xl cursor-not-allowed opacity-80 border bg-white/10 border-white/20">
-            <div className="text-left leading-tight">
-              <p className="text-[9px] text-white/50 uppercase tracking-widest">{sub}</p>
-              <p className="text-[12px] font-semibold text-white"
-                style={{ fontFamily: "'Syne', sans-serif" }}>{label}</p>
+      {/* ── CTA ── */}
+      <section className="py-20 bg-[#F7F8FA]">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+          <div className="bg-[#0B1F4B] rounded-2xl px-8 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <p className="text-[11px] tracking-[2.5px] uppercase text-[#6B9FE4] font-semibold mb-3"
+                style={{ fontFamily: "'Syne', sans-serif" }}>Join Our Network</p>
+              <h2 className="text-[28px] md:text-[36px] font-bold text-white leading-tight tracking-[-0.8px]"
+                style={{ fontFamily: "'Syne', sans-serif" }}>
+                Start Earning <span className="text-[#E8212B]">Today</span>
+              </h2>
+              <p className="mt-3 text-[14px] text-[#9BA3AF] font-light leading-relaxed max-w-md">
+                Join our growing network of drivers and start earning with
+                flexible delivery jobs across Liberia.
+              </p>
             </div>
-            <span className="absolute -top-2 -right-2 bg-[#E8212B] text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
-              Soon
-            </span>
+            <div className="shrink-0">
+              <StoreButtons playUrl={RIDER_PLAY_URL} variant="dark" />
+            </div>
           </div>
-        ))}
-      </div>
-
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
     </div>
   );
